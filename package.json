@@ -1,0 +1,27 @@
+{
+  "name": "fpcalc",
+  "version": "0.0.0",
+  "description": "Light wrapper around the AcoustID Chromaprint fpcalc tool",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:parshap/node-fpcalc.git"
+  },
+  "keywords": [
+    "fpcalc",
+    "chromaprint",
+    "acoustid",
+    "musicbrainz",
+    "music",
+    "audio",
+    "fingerprint"
+  ],
+  "author": "Parsha Pourkhomami",
+  "license": "Public Domain",
+  "bugs": {
+    "url": "https://github.com/parshap/node-fpcalc/issues"
+  }
+}
