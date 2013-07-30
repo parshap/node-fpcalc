@@ -1,6 +1,6 @@
 # node-fpcalc
 
-Lightweight wrapper around the [Acoustid fpcalc command-line
+A wrapper around the [AcoustID fpcalc command-line
 tool](http://acoustid.org/chromaprint) providing a Node interface to get
 audio fingerprints.
 
@@ -9,17 +9,17 @@ audio fingerprints.
 ```js
 fpcalc("./audio.mp3", function(err, result) {
 	if (err) throw err;
-	console.log(result.path, result.duration, result.fingerprint);
+	console.log(result.file, result.duration, result.fingerprint);
 });
 ```
 
 # API
 
-## `fpcalc(path, options, callback)`
+## `fpcalc(file, options, callback)`
 
 Calculates the fingerprint of the given audio file.
 
-*Path* must be the path to an audio file.
+*File* must be the path to an audio file.
 
 *Options* may be an object with the following keys:
 
@@ -30,15 +30,15 @@ Calculates the fingerprint of the given audio file.
 result)` once the fingerprint is calculated. The *result object* will
 contain the following keys:
 
- * `path`: Path to the audio file
+ * `file`: Path to the audio file
  * `duration`: Duration of audio file in seconds
  * `fingerprint`: Fingerprint of audio file
 
 # Installation
 
-**The [*fpcalc* command-line utility](http://acoustid.org/chromaprint) must be
-installed.** This is often available via your package manager (e.g., `apt-get
-install libchromaprint-tools` or `brew install chromaprint`).
+**The [*fpcalc* command-line tool](http://acoustid.org/chromaprint) must
+be installed.** This is often available via your package manager (e.g.,
+`apt-get install libchromaprint-tools` or `brew install chromaprint`).
 
 ```
 npm install fpcalc

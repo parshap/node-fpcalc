@@ -5,7 +5,7 @@ var COMMAND = "fpcalc";
 var run = require("comandante"),
 	split = require("split");
 
-module.exports = function(path, options, callback) {
+module.exports = function(file, options, callback) {
 	if ( ! callback) {
 		callback = options;
 		options = {};
@@ -17,7 +17,7 @@ module.exports = function(path, options, callback) {
 		args.push("-length", options.length);
 	}
 
-	args.push(path);
+	args.push(file);
 
 	// Create a result object to build as data comes in
 	var result = {};
