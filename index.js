@@ -102,9 +102,9 @@ function reduce(fn, acc, callback) {
 // Data is given as lines like `FILE=path/to/file`, so we split the
 // parts out to a name/value pair
 function parseData(data) {
-	var parts = data.split("=", 2);
+	var index = data.indexOf("=");
 	return {
-		name: parts[0].toLowerCase(),
-		value: parts[1],
+		name: data.slice(0, index).toLowerCase(),
+		value: data.slice(index + 1),
 	};
 }
