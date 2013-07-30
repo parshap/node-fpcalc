@@ -25,10 +25,10 @@
     "url": "https://github.com/parshap/node-fpcalc/issues"
   },
   "dependencies": {
-    "comandante": "0.0.1",
-    "split": "~0.2.6"
+    "event-stream": "~3",
+    "concat-stream": "~1"
   },
   "devDependencies": {
-    "tape": "~1.0.4"
+    "tape": "~1"
   }
 }
