@@ -1,6 +1,6 @@
 {
   "name": "fpcalc",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Light wrapper around the AcoustID Chromaprint fpcalc tool",
   "main": "index.js",
   "scripts": {
