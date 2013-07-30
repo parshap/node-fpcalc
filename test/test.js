@@ -1,3 +1,4 @@
+/* jshint node:true */
 "use strict";
 
 var path = require("path"),
@@ -11,7 +12,7 @@ test("get audio fingerprint", function(t) {
 		t.ifError(err);
 		t.ok(result.file);
 		t.ok(result.duration);
-		t.ok(result.fingerprint);
+		t.equal(result.fingerprint, "AQAAT2bCawriI7l83FEc7BF-vN3xhQqeSEcTKugv_OHw48lBTj9ybN9EXEdSJSGuFXe-oUGVX7gUNExiBmXnQ-MD_5hy7rgF_vCYXGD0HD-m_8jLQt6R58TH5YCXnQhPaHmOPBHOHH9g6UZ8JoHybwh9HUws4zr4C-E7JMuJOeRxCvdkhJsSHcni_Dhx_MfX40cdX8gjQrmFnCduZYZ_EZMShhp2kUUzpTkaLmxx0iGaG1WmBGeyeQABmAAECQMYE4AwY4FSQnBCJAPIEAIEAEI4IgQhxBoCmDEGIEIAMggCAxQSgCgHjAOAAGAEcEQoQyxQRBEDEBCACAA");
 		t.end();
 	});
 });
