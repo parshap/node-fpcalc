@@ -4,7 +4,7 @@
   "description": "Light wrapper around the AcoustID Chromaprint fpcalc tool",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node test/test.js"
   },
   "repository": {
     "type": "git",
@@ -23,5 +23,7 @@
   "license": "Public Domain",
   "bugs": {
     "url": "https://github.com/parshap/node-fpcalc/issues"
+  "devDependencies": {
+    "tape": "~1.0.4"
   }
 }
