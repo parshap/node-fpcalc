@@ -23,6 +23,11 @@
   "license": "Public Domain",
   "bugs": {
     "url": "https://github.com/parshap/node-fpcalc/issues"
+  },
+  "dependencies": {
+    "comandante": "0.0.1",
+    "split": "~0.2.6"
+  },
   "devDependencies": {
     "tape": "~1.0.4"
   }
