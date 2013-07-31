@@ -17,13 +17,11 @@
     "musicbrainz",
     "music",
     "audio",
-    "fingerprint"
+    "fingerprint",
+    "mp3"
   ],
   "author": "Parsha Pourkhomami",
   "license": "Public Domain",
-  "bugs": {
-    "url": "https://github.com/parshap/node-fpcalc/issues"
-  },
   "dependencies": {
     "event-stream": "~3",
     "concat-stream": "~1"
