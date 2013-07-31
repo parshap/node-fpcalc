@@ -1,8 +1,8 @@
 # node-fpcalc
 
-A wrapper around the [AcoustID fpcalc command-line
-tool](http://acoustid.org/chromaprint) providing a Node interface to get
-audio fingerprints.
+Calculate [AcoustID](http://acoustid.org/) audio fingerprint for a given
+audio file using the [Chromaprint fpcalr
+tool](http://acoustid.org/chromaprint).
 
 # Example
 

@@ -1,7 +1,7 @@
 {
   "name": "fpcalc",
   "version": "1.0.4",
-  "description": "Light wrapper around the AcoustID Chromaprint fpcalc tool",
+  "description": "Calculate AcoustID audio fingerprint",
   "main": "index.js",
   "scripts": {
     "test": "node test/test.js"
