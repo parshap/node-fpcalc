@@ -47,8 +47,9 @@ function run(args) {
 	// Catch fpcalc stderr errors even when exit code is 0
 	// See https://bitbucket.org/acoustid/chromaprint/issue/2/fpcalc-return-non-zero-exit-code-if
 	cp.stderr.pipe(concat(function(data) {
-		data = data.toString();
-		if (data && data.slice(0, 6) === "ERROR:") {
+		if (data &&
+			(data = data.toString()) &&
+			data.slice(0, 6) === "ERROR:") {
 			stream.emit("error", new Error(data));
 		}
 	}));
