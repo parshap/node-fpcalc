@@ -15,7 +15,7 @@ fpcalc("./audio.mp3", function(err, result) {
 
 # API
 
-## `fpcalc(file, options, callback)`
+## `fpcalc(file, [options,] callback)`
 
 Calculates the fingerprint of the given audio file.
 
