@@ -20,7 +20,8 @@ module.exports = function(file, options, callback) {
 
 	run(args)
 		.on("error", callback)
-		.pipe(parse(callback.bind(null, null)));
+		.pipe(parse())
+		.on("data", callback.bind(null, null));
 };
 
 // -- Run fpcalc command
@@ -29,7 +30,8 @@ var spawn = require("child_process").spawn,
 	fpcalc = spawn.bind(null, "fpcalc"),
 	es = require("event-stream"),
 	concat = require("concat-stream"),
-	filter = require("stream-filter");
+	filter = require("stream-filter"),
+	reduce = require("stream-reduce");
 
 // Runs the fpcalc tool and returns a readable stream that will emit stdout
 // or an error event if an error occurs
@@ -65,7 +67,7 @@ function run(args) {
 
 // -- fpcalc stdout stream parsing
 
-function parse(callback) {
+function parse() {
 	return es.pipeline(
 		// Parse one complete line at a time
 		es.split(),
@@ -77,18 +79,8 @@ function parse(callback) {
 		reduce(function(result, data) {
 			result[data.name] = data.value;
 			return result;
-		}, {}, callback)
+		}, {})
 	);
-}
-
-// Reduce stream data into a single value
-// @TODO Extract this to own module
-function reduce(fn, acc, callback) {
-	return es.through(function(data) {
-		acc = fn(acc, data);
-	}, function() {
-		callback(acc);
-	});
 }
 
 // Data is given as lines like `FILE=path/to/file`, so we split the

@@ -25,7 +25,8 @@
   "dependencies": {
     "event-stream": "~3",
     "concat-stream": "~1",
-    "stream-filter": "~1"
+    "stream-filter": "~1",
+    "stream-reduce": "~1"
   },
   "devDependencies": {
     "tape": "~1"
