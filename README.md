@@ -1,7 +1,7 @@
 # node-fpcalc
 
 Calculate [AcoustID](http://acoustid.org/) audio fingerprint for a given
-audio file using the [Chromaprint fpcalr
+audio file using the [Chromaprint fpcalc
 tool](http://acoustid.org/chromaprint).
 
 # Example
