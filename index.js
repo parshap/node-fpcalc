@@ -28,7 +28,8 @@ module.exports = function(file, options, callback) {
 var spawn = require("child_process").spawn,
 	fpcalc = spawn.bind(null, "fpcalc"),
 	es = require("event-stream"),
-	concat = require("concat-stream");
+	concat = require("concat-stream"),
+	filter = require("stream-filter");
 
 // Runs the fpcalc tool and returns a readable stream that will emit stdout
 // or an error event if an error occurs
@@ -78,16 +79,6 @@ function parse(callback) {
 			return result;
 		}, {}, callback)
 	);
-}
-
-// Create a through stream that only passes data that passes the given test
-// @TODO Extract this to own module
-function filter(test) {
-	return es.mapSync(function(data) {
-		if (test(data)) {
-			return data;
-		}
-	});
 }
 
 // Reduce stream data into a single value
