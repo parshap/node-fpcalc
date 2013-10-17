@@ -46,8 +46,7 @@ function run(args) {
 
 		// Create the stream that we will eventually return. This stream
 		// passes through any data (cp's stdout) but does not emit an end
-		// event so that we can make sure the child process exited without
-		// error.
+		// event so that we can make sure the process exited without error.
 		stream = es.through(null, function() {});
 
 	// Pass fpcalc stdout through the stream
@@ -63,8 +62,12 @@ function run(args) {
 		}
 	}));
 
-	// End the stream when the child processes closes
-	cp.on("close", function() {
+	// Check process exit code and end the stream
+	cp.on("close", function(code) {
+		if (code !== 0) {
+			stream.emit("error", new Error("fpcalc failed"));
+		}
+
 		stream.queue(null);
 	});
 
