@@ -18,7 +18,21 @@ test("get audio fingerprint", function(t) {
 });
 
 test("bad file path", function(t) {
-	fpcalc("bad/path", function(err, result) {
+	fpcalc("bad/path", function(err) {
+		t.ok(err);
+		t.end();
+	});
+});
+
+test("no file path", function(t) {
+	fpcalc(undefined, function(err) {
+		t.ok(err);
+		t.end();
+	});
+});
+
+test("non-audio file", function(t) {
+	fpcalc(path.join(__dirname, "/../index.js"), function(err) {
 		t.ok(err);
 		t.end();
 	});
