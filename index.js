@@ -1,12 +1,17 @@
 /* jshint node:true */
 "use strict";
 
+var once = require("once");
+
 module.exports = function(file, options, callback) {
 	// Handle `options` parameter being optional
 	if ( ! callback) {
 		callback = options;
 		options = {};
 	}
+
+	// Make sure the callback is called only once
+	callback = once(callback);
 
 	// Command-line arguments to pass to fpcalc
 	var args = [];
@@ -26,8 +31,7 @@ module.exports = function(file, options, callback) {
 
 // -- Run fpcalc command
 
-var spawn = require("child_process").spawn,
-	fpcalc = spawn.bind(null, "fpcalc"),
+var fpcalc = require("child_process").spawn.bind(null, "fpcalc"),
 	es = require("event-stream"),
 	concat = require("concat-stream"),
 	filter = require("stream-filter"),
@@ -37,11 +41,13 @@ var spawn = require("child_process").spawn,
 // or an error event if an error occurs
 function run(args) {
 	var
-		// Create fpcalc child process
+		// Start the  fpcalc child process
 		cp = fpcalc(args),
-		// Create a through stream that passes through data but does not end
-		// when the source stream ends. We will manually end the stream once
-		// the child processes closes.
+
+		// Create the stream that we will eventually return. This stream
+		// passes through any data (cp's stdout) but does not emit an end
+		// event so that we can make sure the child process exited without
+		// error.
 		stream = es.through(null, function() {});
 
 	// Pass fpcalc stdout through the stream
