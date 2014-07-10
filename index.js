@@ -4,10 +4,14 @@
 var once = require("once");
 
 module.exports = function(file, options, callback) {
+	if (typeof(module.exports.options) == "undefined") module.exports.options = {
+	  executable: "fpcalc"
+	}
+	
 	// Handle `options` parameter being optional
 	if ( ! callback) {
 		callback = options;
-		options = {};
+		options = module.exports.options || {};
 	}
 
 	// Make sure the callback is called only once
@@ -29,9 +33,15 @@ module.exports = function(file, options, callback) {
 		.on("data", callback.bind(null, null));
 };
 
+module.exports.configure = function(options) {
+	
+	// todo: extend existing options instead of replacing them
+	module.exports.options = options;
+}
+
 // -- Run fpcalc command
 
-var fpcalc = require("child_process").spawn.bind(null, "fpcalc"),
+var childProc = require("child_process"),
 	es = require("event-stream"),
 	concat = require("concat-stream"),
 	filter = require("stream-filter"),
@@ -42,13 +52,16 @@ var fpcalc = require("child_process").spawn.bind(null, "fpcalc"),
 function run(args) {
 	var
 		// Start the  fpcalc child process
-		cp = fpcalc(args),
+		cmd = module.exports.options.executable,
 
 		// Create the stream that we will eventually return. This stream
 		// passes through any data (cp's stdout) but does not emit an end
 		// event so that we can make sure the process exited without error.
 		stream = es.through(null, function() {});
 
+	console.log("spawning " + cmd + " " + args.join(" "));
+	var cp = childProc.spawn(cmd, args);
+	
 	// Pass fpcalc stdout through the stream
 	cp.stdout.pipe(stream);
 
@@ -75,7 +88,6 @@ function run(args) {
 }
 
 // -- fpcalc stdout stream parsing
-
 function parse() {
 	return es.pipeline(
 		// Parse one complete line at a time
