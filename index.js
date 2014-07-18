@@ -23,7 +23,7 @@ module.exports = function(file, options, callback) {
 
 	args.push(file);
 
-	run(args)
+	run(args, options)
 		.on("error", callback)
 		.pipe(parse())
 		.on("data", callback.bind(null, null));
@@ -31,7 +31,7 @@ module.exports = function(file, options, callback) {
 
 // -- Run fpcalc command
 
-var fpcalc = require("child_process").spawn.bind(null, "fpcalc"),
+var spawn = require("child_process").spawn,
 	es = require("event-stream"),
 	concat = require("concat-stream"),
 	filter = require("stream-filter"),
@@ -39,10 +39,13 @@ var fpcalc = require("child_process").spawn.bind(null, "fpcalc"),
 
 // Runs the fpcalc tool and returns a readable stream that will emit stdout
 // or an error event if an error occurs
-function run(args) {
+function run(args, options) {
 	var
+		// The command to run
+		command = options.command || "fpcalc",
+
 		// Start the  fpcalc child process
-		cp = fpcalc(args),
+		cp = spawn(command, args),
 
 		// Create the stream that we will eventually return. This stream
 		// passes through any data (cp's stdout) but does not emit an end

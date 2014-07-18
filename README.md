@@ -22,10 +22,11 @@ Calculates the fingerprint of the given audio file.
 
 *File* must be the path to an audio file.
 
-*Options* may be an object with the following keys:
+*Options* may be an object with any of the following keys:
 
  * `length`: Length of the audio data used for fingerprint calculation
    (passed as `-length` option)
+ * `command`: Path to the fpcalc command to use (defaults to `"fpcalc"`)
 
 *Callback* must be a function that will be called with `callback(err,
 result)` once the fingerprint is calculated. The *result object* will
