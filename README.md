@@ -1,22 +1,42 @@
-# node-fpcalc
+# fpcalc
 
-Calculate [AcoustID](http://acoustid.org/) audio fingerprint for a given
-audio file using the [Chromaprint fpcalc
-tool](http://acoustid.org/chromaprint).
+This module is a wrapper around the [`fpcalc` command-line tool][chromaprint]
+and provides a node interface to calculate [AcoustID][] audio
+fingerprints for audio files.
 
-# Example
+[chromaprint]: http://acoustid.org/chromaprint
+[acoustid]: http://acoustid.org/
+
+## Installing Chromaprint
+
+[`fpcalc` (provided by *Chromaprint*)][chromaprint] must be installed for
+this module to function.
+
+**OSX using Homebrew**
+
+```
+$ brew install chromaprint
+```
+
+**Ubuntu**
+
+```
+$ sudo apt-get install libchromaprint-tools
+```
+
+## Example
 
 ```js
 var fpcalc = require("fpcalc");
 fpcalc("./audio.mp3", function(err, result) {
-	if (err) throw err;
-	console.log(result.file, result.duration, result.fingerprint);
+  if (err) throw err;
+  console.log(result.file, result.duration, result.fingerprint);
 });
 ```
 
-# API
+## API
 
-## `fpcalc(file, [options,] callback)`
+### `fpcalc(file, [options,] callback)`
 
 Calculates the fingerprint of the given audio file.
 
@@ -36,12 +56,8 @@ contain the following keys:
  * `duration`: Duration of audio file in seconds
  * `fingerprint`: Fingerprint of audio file
 
-# Installation
-
-**The [*fpcalc* command-line tool](http://acoustid.org/chromaprint) must
-be installed.** This is often available via your package manager (e.g.,
-`apt-get install libchromaprint-tools` or `brew install chromaprint`).
+## Installation
 
 ```
-npm install fpcalc
+npm install --save fpcalc
 ```
