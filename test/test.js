@@ -39,10 +39,11 @@ test("non-audio file", function(t) {
 });
 
 test("fingerprint output", function(t) {
-  t.plan(2);
+  t.plan(3);
 
 	fpcalc(TEST_FILE, {raw: true}, function(err, result) {
-		t.ok(/^[\d,-]+$/.test(result.fingerprint));
+		t.ok(result.fingerprint);
+		t.ok(Buffer.isBuffer(result.fingerprint));
 	});
 
 	fpcalc(TEST_FILE, function(err, result) {

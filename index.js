@@ -31,7 +31,16 @@ module.exports = function(file, options, callback) {
 	run(args, options)
 		.on("error", callback)
 		.pipe(parse())
-		.on("data", callback.bind(null, null));
+		.on("data", function(results) {
+			if (options.raw) {
+				results.fingerprint = new Buffer(
+					results.fingerprint.split(",").map(function(value) {
+						return parseInt(value);
+					})
+				);
+			}
+			callback(null, results);
+		});
 };
 
 // -- Run fpcalc command
