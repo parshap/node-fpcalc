@@ -21,6 +21,11 @@ module.exports = function(file, options, callback) {
 		args.push("-length", options.length);
 	}
 
+	// `-raw` command-line argument
+	if (options.raw) {
+		args.push("-raw");
+	}
+
 	args.push(file);
 
 	run(args, options)

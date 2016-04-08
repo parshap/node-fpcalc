@@ -46,6 +46,7 @@ Calculates the fingerprint of the given audio file.
 
  * `length`: Length of the audio data used for fingerprint calculation
    (passed as `-length` option)
+ * `raw`: Output the raw uncompressed fingerprint (`false` by default)
  * `command`: Path to the fpcalc command to use (defaults to `"fpcalc"`)
 
 *Callback* must be a function that will be called with `callback(err,
