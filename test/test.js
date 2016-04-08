@@ -39,7 +39,7 @@ test("non-audio file", function(t) {
 });
 
 test("fingerprint output", function(t) {
-  t.plan(3);
+	t.plan(5);
 
 	fpcalc(TEST_FILE, {raw: true}, function(err, result) {
 		t.ok(result.fingerprint);
@@ -47,6 +47,8 @@ test("fingerprint output", function(t) {
 	});
 
 	fpcalc(TEST_FILE, function(err, result) {
+		t.ok(result.fingerprint);
+		t.equal(typeof result.fingerprint, "string");
 		t.ok(/^[-_a-zA-Z0-9]+$/.test(result.fingerprint));
 	});
 });
