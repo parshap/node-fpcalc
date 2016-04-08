@@ -37,3 +37,15 @@ test("non-audio file", function(t) {
 		t.end();
 	});
 });
+
+test("fingerprint output", function(t) {
+  t.plan(2);
+
+	fpcalc(TEST_FILE, {raw: true}, function(err, result) {
+		t.ok(/^[\d,-]+$/.test(result.fingerprint));
+	});
+
+	fpcalc(TEST_FILE, function(err, result) {
+		t.ok(/^[-_a-zA-Z0-9]+$/.test(result.fingerprint));
+	});
+});
