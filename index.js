@@ -33,11 +33,16 @@ module.exports = function(file, options, callback) {
 		.pipe(parse())
 		.on("data", function(results) {
 			if (options.raw) {
-				results.fingerprint = new Buffer(
-					results.fingerprint.split(",").map(function(value) {
+				var fingerprint = results.fingerprint
+					.split(",")
+					.map(function(value) {
 						return parseInt(value);
-					})
-				);
+					});
+				results.fingerprintRaw = results.fingerprint;
+				results.fingerprint = new Buffer(fingerprint.length * 4);
+				for (var i = 0; i < fingerprint.length; i ++) {
+					results.fingerprint.writeInt32BE(fingerprint[i], i * 4, true);
+				}
 			}
 			callback(null, results);
 		});
