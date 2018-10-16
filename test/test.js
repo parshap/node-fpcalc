@@ -2,6 +2,7 @@
 "use strict";
 
 var path = require("path"),
+	fs = require("fs"),
 	test = require("tape"),
 	fpcalc = require("../");
 
@@ -50,5 +51,30 @@ test("fingerprint output", function(t) {
 		t.ok(result.fingerprint);
 		t.equal(typeof result.fingerprint, "string");
 		t.ok(/^[-_a-zA-Z0-9]+$/.test(result.fingerprint));
+	});
+});
+
+test("stream input", function(t) {
+	t.plan(5);
+
+	fpcalc(fs.createReadStream(TEST_FILE), {raw: true}, function(err, result) {
+		t.ok(result.fingerprint);
+		t.ok(Buffer.isBuffer(result.fingerprint));
+	});
+
+	fpcalc(fs.createReadStream(TEST_FILE), function(err, result) {
+		t.ok(result.fingerprint);
+		t.equal(typeof result.fingerprint, "string");
+		t.ok(/^[-_a-zA-Z0-9]+$/.test(result.fingerprint));
+	});
+});
+
+test("stream fignerprint is the same as file fingerprint", function(t) {
+	t.plan(1);
+
+	fpcalc(fs.createReadStream(TEST_FILE), function(err, streamResult) {
+		fpcalc(TEST_FILE, function(err, fileResult) {
+			t.equal(fileResult.fingerprint, streamResult.fingerprint);
+		});
 	});
 });

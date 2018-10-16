@@ -26,7 +26,12 @@ module.exports = function(file, options, callback) {
 		args.push("-raw");
 	}
 
-	args.push(file);
+	if (file && typeof file.pipe === "function") {
+		args.push("-");
+		options.stdin = file;
+	} else {
+		args.push(file);
+	}
 
 	run(args, options)
 		.on("error", callback)
@@ -70,6 +75,11 @@ function run(args, options) {
 		// passes through any data (cp's stdout) but does not emit an end
 		// event so that we can make sure the process exited without error.
 		stream = es.through(null, function() {});
+
+	// If passed stdin stream, pipe it to the child process
+	if (options.stdin) {
+		options.stdin.pipe(cp.stdin);
+	}
 
 	// Pass fpcalc stdout through the stream
 	cp.stdout.pipe(stream);
