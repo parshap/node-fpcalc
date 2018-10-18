@@ -40,7 +40,9 @@ fpcalc("./audio.mp3", function(err, result) {
 
 Calculates the fingerprint of the given audio file.
 
-*File* must be the path to an audio file.
+*File* must be the path to an audio file or a readable stream.
+
+If using a stream, note that you will not get `duration` out due to an [fpcalc issue](https://github.com/acoustid/chromaprint/issues/53).
 
 *Options* may be an object with any of the following keys:
 
