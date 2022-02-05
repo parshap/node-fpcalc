@@ -31,5 +31,6 @@
   },
   "devDependencies": {
     "tape": "^4.2.1"
-  }
+  },
+  "types": "index.d.ts"
 }
