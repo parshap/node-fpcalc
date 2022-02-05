@@ -13,7 +13,7 @@ declare module "fpcalc" {
 
     function fpcalc(file: string | ReadableStream, callback: (err: Error, result: FpcalcResult<string>) => void)
     function fpcalc(file: string | ReadableStream, options: FpcalcOptions & { raw: true }, callback: (err: Error, result: FpcalcResult<Buffer>) => void)
-    function fpcalc(file: string | ReadableStream, options: FpcalcOptions & { raw: false }, callback: (err: Error, result: FpcalcResult<string>) => void)
+    function fpcalc(file: string | ReadableStream, options: FpcalcOptions, callback: (err: Error, result: FpcalcResult<string>) => void)
 
     export default fpcalc
 }
